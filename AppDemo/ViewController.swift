@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tblTabla: UITableView!
     
      var filaSeleccionada = -1
+    var esEdicion = false
      var datos = [("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23)]
     
     override func viewDidLoad() {
@@ -58,7 +59,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             break
         case "Agregar segue":
             let view = segue.destination as! AgregarViewController
-            
+            if(esEdicion){
+                    view.fila = filaSeleccionada
+                    view.Nombre = datos[filaSeleccionada].0
+                    view.Edad = datos[filaSeleccionada].1
+                esEdicion = false
+            }
             view.delegado = self
             break
         default:
@@ -79,6 +85,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
        return datos.count
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let eliminar = UITableViewRowAction(style: .destructive, title: "Borrar", handler: borrarFila)
+        let editar = UITableViewRowAction(style: .normal, title: "Editar", handler: editarFila)
+        
+        return [eliminar, editar]
+    }
+    func borrarFila(sender : UITableViewRowAction, indexPath : IndexPath){
+        datos.remove(at: indexPath.row)
+        tblTabla.reloadData()
+    }
+    func editarFila(sender : UITableViewRowAction, indexPath : IndexPath){
+        esEdicion = true
+        filaSeleccionada = indexPath.row
+        performSegue(withIdentifier: "Agregar segue", sender: sender)
+        
+    }
+    func modificarRegistro(nombre: String, edad: Int, fila: Int) {
+        datos.remove(at: fila)
+        datos.insert((nombre, edad), at: fila)
+        tblTabla.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
