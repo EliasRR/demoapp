@@ -12,16 +12,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var array = ["Hola"]
     
-    
+    var filaSeleccionada = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print("vista cargada")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let view = segue.destination as! DetalleViewController
+        view.numerFila = filaSeleccionada
     }
     
 
@@ -49,19 +56,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //F2
         
-        let vista = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as! FilaTableViewCell
+       let vista = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as! FilaTableViewCell
         
             vista.lbIzquierda.text = "Index!"
             vista.lbDerecha.text = "\(indexPath.row)"
         
-        return vista
+            return vista
         
     }
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath:  IndexPath)    {
-    print("Fila\(indexPath.row)" )
+        filaSeleccionada = indexPath.row
+        performSegue(withIdentifier: "Detalle Segue", sender: self)
     }
     
     @IBOutlet weak var entrar: UIButton!

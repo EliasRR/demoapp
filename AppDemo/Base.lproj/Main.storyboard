@@ -26,9 +26,6 @@
                                 <rect key="frame" x="166" y="500" width="42" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Entrar"/>
-                                <connections>
-                                    <segue destination="gCJ-A3-yOi" kind="show" id="IWb-aI-f1g"/>
-                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZ9-zg-0qX">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
@@ -38,7 +35,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" tableViewCell="d52-hw-YNp" id="g8V-xZ-zmB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzW-zE-ZNM">
@@ -108,6 +105,7 @@
                     <navigationItem key="navigationItem" id="AF6-TL-d0Y"/>
                     <connections>
                         <outlet property="entrar" destination="fS7-0W-gfg" id="YqH-sb-bcw"/>
+                        <segue destination="gCJ-A3-yOi" kind="show" identifier="Detalle Segue" id="chb-Vu-Nnd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -130,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="-971" y="35"/>
         </scene>
-        <!--View Controller-->
+        <!--Detalle View Controller-->
         <scene sceneID="zle-nY-5om">
             <objects>
-                <viewController id="gCJ-A3-yOi" sceneMemberID="viewController">
+                <viewController id="gCJ-A3-yOi" customClass="DetalleViewController" customModule="AppDemo" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YBZ-aV-a8E"/>
                         <viewControllerLayoutGuide type="bottom" id="OPC-UO-vTX"/>
@@ -141,12 +139,34 @@
                     <view key="view" contentMode="scaleToFill" id="F2m-Hi-oK5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Oec-Ko-9Ek">
+                                <rect key="frame" x="139" y="274" width="42" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdj-ML-hnH">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="0.18205053195728282" green="1" blue="0.98270758409300496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="OPC-UO-vTX" firstAttribute="top" secondItem="Oec-Ko-9Ek" secondAttribute="bottom" constant="377" id="Idv-se-ArY"/>
+                            <constraint firstItem="Oec-Ko-9Ek" firstAttribute="leading" secondItem="F2m-Hi-oK5" secondAttribute="leadingMargin" constant="106" id="Q0g-Iy-JXt"/>
+                            <constraint firstItem="Oec-Ko-9Ek" firstAttribute="top" secondItem="YBZ-aV-a8E" secondAttribute="bottom" constant="106" id="Wgc-2X-Aep"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Oec-Ko-9Ek" secondAttribute="trailing" constant="140" id="tew-aw-B69"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Labelname" destination="fdj-ML-hnH" id="t6L-8p-D9D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKX-up-D5K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1005" y="35"/>
+            <point key="canvasLocation" x="1011" y="35"/>
         </scene>
     </scenes>
 </document>
