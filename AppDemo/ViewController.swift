@@ -7,23 +7,37 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DetalleViewControllerDelegate, AgregarViewControllerDelegate {
     
     var array = ["Hola"]
     
+    @IBOutlet weak var lbImage: UILabel!
+   
+
+    @IBOutlet weak var imageapp: UIImageView!
     @IBOutlet weak var tblTabla: UITableView!
     
      var filaSeleccionada = -1
     var esEdicion = false
-     var datos = [("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23)]
+     var datos = [("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23),("Elias", 27), ("María", 29), ("Jesus", 40), ("Eugenia", 35), ("Mariela", 23), ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print("vista cargada")
+        imageapp.image = UIImage(named: "image")
+        lbImage.text = "Elias Rodríguez"
+        
     }
-
+    @IBAction func btnrefresh_Click(_ sender: Any) {
+        let idFacebook = FBSDKAccessToken.current().userID
+        let cadenaUrl = "http://graph.facebook.com/\(idFacebook!)/picture?type=large"
+        
+        imageapp.loadPicture(url: cadenaUrl)
+        //imageapp.image = UIImage(data:Data(contentsOf: URL(String: "http:www.google.com")))
+    }
     @IBAction func btnAgregar(_ sender: Any) {
         performSegue(withIdentifier: "Agregar segue", sender: self)
         
@@ -47,6 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
    
     
     
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier! {
@@ -128,10 +143,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //F2
         
+        
+        
+        
+        
+        
+        
        let vista = tableView.dequeueReusableCell(withIdentifier: "proto1", for: indexPath) as! FilaTableViewCell
         
             vista.lbIzquierda.text = "\(datos[indexPath.row].0)"
             vista.lbDerecha.text = "\(datos[indexPath.row].1)"
+        
+        //vista.imgFoto.image = UIImage(named: "image")
+        
+        let idFacebook = FBSDKAccessToken.current().userID
+        let cadenaUrl = "http://graph.facebook.com/\(idFacebook!)/picture?type=large"
+        let url = URL(string: cadenaUrl)
+        let dato : Data?
+        
+        do {
+            dato = try  Data(contentsOf: url!)
+            vista.imgFoto.image = UIImage(data: dato!)
+            
+        }catch{
+            print ("Error al cargar la imagen \(error)")
+            dato = nil
+            vista.imgFoto.image = UIImage(named: "image")
+        }
+
         
             return vista
     }

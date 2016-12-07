@@ -14,6 +14,8 @@ protocol AgregarViewControllerDelegate {
 }
 
 class AgregarViewController: UIViewController {
+    
+    
 
     @IBOutlet weak var txtNombre: UITextField!
     
